@@ -1,9 +1,10 @@
 import pandas as pd
 import jieba
+from sspai_user_info import *
 from collections import Counter
 
 # 读入数据，并查看数据
-data = pd.read_excel(r'../myGit/sspai_spider/sspai.xlsx')
+data = pd.read_excel(r'./data/page_data.xlsx')
 data.info()
 data.head()
 
@@ -17,6 +18,15 @@ data.released_time = pd.to_datetime(data['released_time'], unit='s')
 data.columns = data.columns.str.replace('.', '_')
 
 # 用户画像
+## 用户成就数据获取
+slug = data.author_slug.unique().tolist()
+user_data = {}
+for auth in slug:
+    user_data[auth] = user_info(auth)
+user_data = (pd.DataFrame(user_data)
+             .T
+             .reset_index()
+             .rename(columns={'index':'author_slug'}))
 
 
 # 分词
