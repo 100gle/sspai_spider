@@ -51,4 +51,4 @@ if __name__ == "__main__":
     all_data = concat_data(page)
     final_data = pd.concat([data for data in all_data.values()],
                            ignore_index=True)
-    final_data.to_excel(r'./page_data.xlsx', index=False)
+    final_data.to_excel(r'./data/page_data.xlsx', index=False)
