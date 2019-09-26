@@ -1,3 +1,6 @@
+# !usr/bin/python
+# coding:utf-8
+
 import requests
 import json
 from pprint import pprint
@@ -26,5 +29,5 @@ def user_info(slug):
         print('unable to get page content: %s' %e)
 
 if __name__ == "__main__":
-    slug='fhwl2s3u'
+    slug='100gle'
     user_info(slug)
