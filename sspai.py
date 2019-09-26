@@ -34,14 +34,21 @@ def main_info(page):
 def concat_data(page):
     random.seed(random._pi)
     all_data = {}
-    while page < 4:
-        all_data['page%s' % page] = main_info(page)
-        page += 1
-        time.sleep(random.random() * random._pi)
+    while True:
+        if page <= 12210:
+            all_data['page%s' % page] = main_info(page)
+            print('Get page %s data...' % page)
+            page += 1
+            time.sleep(random.random() * random._pi)
+        else:
+            print('Stop running!')
+            break
 
     return all_data
 
 
 if __name__ == "__main__":
     all_data = concat_data(page)
-    print(pd.concat([data for data in all_data.values()]))
+    final_data = pd.concat([data for data in all_data.values()],
+                           ignore_index=True)
+    final_data.to_excel(r'./page_data.xlsx', index=False)
