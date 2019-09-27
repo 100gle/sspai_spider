@@ -24,9 +24,9 @@ user_data = {}
 for auth in slug:
     user_data[auth] = user_info(auth)
 user_data = (pd.DataFrame(user_data)
-             .T
-             .reset_index()
-             .rename(columns={'index':'author_slug'}))
+            .T
+            .reset_index()
+            .rename(columns={'index':'author_slug'})
 
 
 # 分词
@@ -48,3 +48,13 @@ title_words = Counter(jieba.lcut(all_))
 
 from pyecharts.charts import WordCloud
 from pyecharts.options import options as opts
+
+
+wordcloud = (
+    WordCloud()
+    .add("", title_words)
+    .set_global_opts()
+    
+)
+
+wordcloud.render()
