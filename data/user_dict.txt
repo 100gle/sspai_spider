@@ -211,6 +211,33 @@ iPad n
 iPad Pro
 iPad mini 5 n
 iPhone
-Macbook
+iPhone 4
+iPhone 4s
+iPhone 5
+iPhone 5s
+iPhone 6
+iPhone 6s Plus
+iPhone 7
+iPhone 7 Plus
+iPhone 8
+iPhone 8 Plus
+iPhone X
+iPhone Xr
+iPhone Xs
+iPhone Xs Max
+iPhone 11
+iPhone 11 Pro
+iPhone 11 Pro Max
+iPod
+iTouch
+iMac
+iMac Pro
 Mac
+Mac Pro
+Macbook
+Macbook Air
 Macbook Pro
+iWatch
+Apple Watch 3
+Apple Watch 4
+Apple Watch 5
