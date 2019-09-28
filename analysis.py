@@ -1,3 +1,6 @@
+#!usr/bin/env python
+#coding:utf-8
+
 import pandas as pd
 import jieba
 from sspai_user_info import *
@@ -32,7 +35,8 @@ user_data = (pd.DataFrame(user_data)
 # 分词
 # jieba.load_userdict() 添加自定义词库
 
-stopwords = ''
+stopwords = 'stay to add'
+
 def word_cut(text):
     words = jieba.lcut(text)
     title = []

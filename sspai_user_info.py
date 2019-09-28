@@ -1,5 +1,5 @@
-# !usr/bin/python
-# coding:utf-8
+#!usr/bin/env python
+#coding:utf-8
 
 import requests
 import json
@@ -10,7 +10,8 @@ def user_info(slug):
     base = 'https://beta.sspai.com/api/v1/user/slug/info/get?slug={}'.format(str(slug))
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 
-        'Referer': 'https://beta.sspai.com/u/{}/updates'.format(str(slug))}
+        'Referer': 'https://beta.sspai.com/u/{}/updates'.format(str(slug))
+    }
     try: 
         res = requests.get(base, headers= headers)
         json_data = json.loads(res.text)
