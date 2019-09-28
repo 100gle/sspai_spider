@@ -12,23 +12,23 @@ def user_info(slug):
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 
         'Referer': 'https://beta.sspai.com/u/{}/updates'.format(str(slug))
     }
+    
+    user_infos = {}
     try: 
-        res = requests.get(base, headers= headers)
+        res = requests.get(base, headers = headers)
         json_data = json.loads(res.text)
-
-        user_info = {}
-        user_info['view_count'] = json_data['data']['article_view_count']
-        user_info['word_count'] = json_data['data']['articles_word_count'] 
-        user_info['like_count'] = json_data['data']['liked_count']
-        user_info['create_at'] = json_data['data']['created_at']
-        user_info['followers_num'] = json_data['data']['followed_count']        
-        pprint(user_info)
-
-        return user_info
+        user_infos['view_count'] = json_data['data']['article_view_count']
+        user_infos['word_count'] = json_data['data']['articles_word_count'] 
+        user_infos['like_count'] = json_data['data']['liked_count']
+        user_infos['create_at'] = json_data['data']['created_at']
+        user_infos['followers_num'] = json_data['data']['followed_count']        
+        pprint(user_infos)
 
     except RequestException as e:
         print('unable to get page content: %s' %e)
 
+    return user_infos
+
 if __name__ == "__main__":
-    slug='100gle'
+    slug='wk3gmw14'
     user_info(slug)
