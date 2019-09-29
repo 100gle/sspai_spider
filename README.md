@@ -1,9 +1,6 @@
-# 文件概述 
-
-## 整个项目的目录结构
+# 整个项目的目录结构
 
 ```
-.
 .
 ├── README.md
 ├── analysis
@@ -16,10 +13,10 @@
 │   └── user_dict.txt
 └── spider
     ├── sspai.py
-    └── sspai_user_info.pyy
+    └── sspai_user_info.py
 ```
 
-## 文件详情
+# 文件详情
 
 - `data`：
   - `page_data.xlsx`：存放爬取到的首页数据
