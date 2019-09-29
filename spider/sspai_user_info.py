@@ -18,11 +18,19 @@ def user_info(slug):
     try: 
         res = requests.get(base, headers = headers)
         json_data = json.loads(res.text)
+        #TODO: pandas.io.json.json_normalize()
         user_infos['view_count'] = json_data['data']['article_view_count']
         user_infos['word_count'] = json_data['data']['articles_word_count'] 
         user_infos['like_count'] = json_data['data']['liked_count']
         user_infos['create_at'] = json_data['data']['created_at']
         user_infos['followers_num'] = json_data['data']['followed_count']        
+        if len(json_data['data']['user_flags']) > 0:
+            user_infos['occupation1'] = json_data['data']['user_flags'][0]['name']
+            user_infos['occupation2'] = json_data['data']['user_flags'][1]['name']
+        else:
+            user_infos['occupation1'] = ''
+            user_infos['occupation2'] = ''
+
         pprint(user_infos)
 
     except RequestException as e:
