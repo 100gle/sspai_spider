@@ -1,3 +1,16 @@
+# VScode files
 .vscode/settings.json
-__pycache__
 .vscode/launch.json
+
+
+# python files
+.ipynb_checkpoints
+__pycache__
+
+
+# macOS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
