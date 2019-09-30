@@ -40,10 +40,8 @@ def user_info(slug):
     except RequestException as e:
         print('unable to get page content: %s' %e)
 
-    return all_data
-
 if __name__ == "__main__":
-    data = pd.read_excel(r'D:/Project/myGit/sspai_spider/data/page_data.xlsx')
+    data = pd.read_excel(r'./data/page_data.xlsx') #Windows用户需要修改路径
     data['author.slug'] = data['author.slug'].str.replace('0lf47ddk', 'sunsetye') #异常值处理
 
     # 用户数据获取
@@ -52,4 +50,4 @@ if __name__ == "__main__":
     for slug in slugs:
         user_data[slug] = user_info(slug)
     user_data = pd.concat([data for data in user_data.values()])
-    user_data.to_excel(r'C:Users/linxiaoyue/Desktop/user_data.xlsx', index=False)
+    user_data.to_excel(r'./data/user_data.xlsx', index=False)
