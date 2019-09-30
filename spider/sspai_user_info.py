@@ -4,6 +4,7 @@
 import requests
 import json
 import pandas as pd
+from pandas.io.json import json_normalize
 from pprint import pprint
 from requests.exceptions import RequestException
 
@@ -15,32 +16,34 @@ def user_info(slug):
     }
     
     user_infos = {}
+    all_data = pd.DataFrame()
     try: 
         res = requests.get(base, headers = headers)
         json_data = json.loads(res.text)
-        #TODO: pandas.io.json.json_normalize()
-        user_infos['view_count'] = json_data['data']['article_view_count']
-        user_infos['word_count'] = json_data['data']['articles_word_count'] 
-        user_infos['like_count'] = json_data['data']['liked_count']
-        user_infos['create_at'] = json_data['data']['created_at']
-        user_infos['followers_num'] = json_data['data']['followed_count']        
-        if len(json_data['data']['user_flags']) > 0:
+
+        user_infos['data.slug'] = json_data['data']['slug']
+        if len(json_data['data']['user_flags']) == 2:
             user_infos['occupation1'] = json_data['data']['user_flags'][0]['name']
             user_infos['occupation2'] = json_data['data']['user_flags'][1]['name']
+        elif len(json_data['data']['user_flags']) == 1:
+            user_infos['occupation1'] = json_data['data']['user_flags'][0]['name']
+            user_infos['occupation2'] = ''
         else:
             user_infos['occupation1'] = ''
             user_infos['occupation2'] = ''
-
-        pprint(user_infos)
+        all_data = pd.merge(json_normalize(json_data),
+                            json_normalize(user_infos), 
+                            on='data.slug')
+        pprint(all_data)
+        return all_data
 
     except RequestException as e:
         print('unable to get page content: %s' %e)
 
-    return user_infos
+    return all_data
 
 if __name__ == "__main__":
-
-    data = pd.read_excel(r'./data/page_data.xlsx')
+    data = pd.read_excel(r'D:/Project/myGit/sspai_spider/data/page_data.xlsx')
     data['author.slug'] = data['author.slug'].str.replace('0lf47ddk', 'sunsetye') #异常值处理
 
     # 用户数据获取
@@ -48,10 +51,5 @@ if __name__ == "__main__":
     user_data = {}
     for slug in slugs:
         user_data[slug] = user_info(slug)
-
-    user_data = (pd.DataFrame(user_data)
-                .T
-                .reset_index()
-                .rename(columns={'index':'author_slug'}))
-
-    user_data.to_excel(r'./data/user2_data.xlsx', index=False)
+    user_data = pd.concat([data for data in user_data.values()])
+    user_data.to_excel(r'C:Users/linxiaoyue/Desktop/user_data.xlsx', index=False)
