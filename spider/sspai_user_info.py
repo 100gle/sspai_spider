@@ -23,14 +23,14 @@ def user_info(slug):
 
         user_infos['data.slug'] = json_data['data']['slug']
         if len(json_data['data']['user_flags']) == 2:
-            user_infos['occupation1'] = json_data['data']['user_flags'][0]['name']
-            user_infos['occupation2'] = json_data['data']['user_flags'][1]['name']
+            user_infos['data.occupation1'] = json_data['data']['user_flags'][0]['name']
+            user_infos['data.occupation2'] = json_data['data']['user_flags'][1]['name']
         elif len(json_data['data']['user_flags']) == 1:
-            user_infos['occupation1'] = json_data['data']['user_flags'][0]['name']
-            user_infos['occupation2'] = ''
+            user_infos['data.occupation1'] = json_data['data']['user_flags'][0]['name']
+            user_infos['data.occupation2'] = ''
         else:
-            user_infos['occupation1'] = ''
-            user_infos['occupation2'] = ''
+            user_infos['data.occupation1'] = ''
+            user_infos['data.occupation2'] = ''
         all_data = pd.merge(json_normalize(json_data),
                             json_normalize(user_infos), 
                             on='data.slug')
